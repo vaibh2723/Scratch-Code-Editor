@@ -82,7 +82,7 @@ export default function App() {
       syncRefs();
       setHistory((prevHistory) => [
         ...prevHistory,
-        { action: "moveSteps", value: -steps / 2 },
+        { action: "moveSteps", value: -steps },
       ]);
       return newX;
     });
@@ -94,7 +94,7 @@ export default function App() {
       syncRefs();
       setHistory((prevHistory) => [
         ...prevHistory,
-        { action: "rotate", value: -angle / 2 },
+        { action: "rotate", value: -angle },
       ]);
       return newRotation;
     });
@@ -107,7 +107,7 @@ export default function App() {
       syncRefs();
       setHistory((prevHistory) => [
         ...prevHistory,
-        { action: "changePosition", deltaX: (prevX - randomX) / 2, deltaY: 0 },
+        { action: "changePosition", deltaX: prevX - randomX, deltaY: 0 },
       ]);
       return randomX;
     });
@@ -115,7 +115,7 @@ export default function App() {
       syncRefs();
       setHistory((prevHistory) => [
         ...prevHistory,
-        { action: "changePosition", deltaX: 0, deltaY: (prevY - randomY) / 2 },
+        { action: "changePosition", deltaX: 0, deltaY: prevY - randomY },
       ]);
       return randomY;
     });

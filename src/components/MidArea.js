@@ -20,11 +20,11 @@ export default function MidArea() {
 
   // const isActive = isOver;
 
-  const isActive = true;
+  // const isActive = true;
   return (
     <div
       // ref={drop}
-      className={`flex-1 h-full overflow-auto ${isActive ? "bg-gray-200" : ""}`}
+      className={`flex-1 h-full overflow-auto `}
     >
       Mid Area
     </div>
