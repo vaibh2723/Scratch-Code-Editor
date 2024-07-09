@@ -16,6 +16,11 @@ export default function MidArea({
   const handleReset = () => {
     setActionData([]);
     onReset();
+    const time = actionData.length;
+
+    setTimeout(() => {
+      window.location.reload();
+    }, time * 400);
   };
 
   const handlePlayActions = () => {

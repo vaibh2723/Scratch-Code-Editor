@@ -169,7 +169,7 @@ export default function App() {
         syncRefs();
 
         if (index === reverseActions.length - 1) {
-          setHistory([]);
+          setHistory([{ action: "changeBackgroundColor", value: "bg-white" }]);
         }
       }, index * 400);
     });
