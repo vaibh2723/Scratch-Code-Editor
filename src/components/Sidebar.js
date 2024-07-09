@@ -1,6 +1,4 @@
 import React from "react";
-// import { useDrag } from "react-dnd";
-import { ItemTypes } from "./ItemTypes";
 
 export default function Sidebar({
   moveSteps,
@@ -13,77 +11,13 @@ export default function Sidebar({
   onReset,
   onScale,
 }) {
-  //Removed the code for drag and drop as drag and drop is not working fine with the browser
+  const handleDragStart = (e, taskId) => {
+    e.dataTransfer.setData("text/plain", taskId.toString());
+  };
 
-  // const [, dragMoveSteps] = useDrag({
-  //   type: ItemTypes.MOVE_STEPS,
-  //   item: { type: ItemTypes.MOVE_STEPS },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       moveSteps(10);
-  //     }
-  //   },
-  // });
-
-  // const [, dragRotate] = useDrag({
-  //   type: ItemTypes.ROTATE,
-  //   item: { type: ItemTypes.ROTATE },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       rotate(15);
-  //     }
-  //   },
-  // });
-
-  // const [, dragSayHello] = useDrag({
-  //   type: ItemTypes.SAY_HELLO,
-  //   item: { type: ItemTypes.SAY_HELLO },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       onSayHelloForSeconds(2);
-  //     }
-  //   },
-  // });
-
-  // const [, dragHide] = useDrag({
-  //   type: ItemTypes.HIDE,
-  //   item: { type: ItemTypes.HIDE },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       onHide();
-  //     }
-  //   },
-  // });
-
-  // const [, dragShow] = useDrag({
-  //   type: ItemTypes.SHOW,
-  //   item: { type: ItemTypes.SHOW },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       onShow();
-  //     }
-  //   },
-  // });
-
-  // const [, dragChangeBackground] = useDrag({
-  //   type: ItemTypes.CHANGE_BACKGROUND,
-  //   item: { type: ItemTypes.CHANGE_BACKGROUND },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       onChangeBackgroundColor();
-  //     }
-  //   },
-  // });
-
-  // const [, dragScale] = useDrag({
-  //   type: ItemTypes.SCALE,
-  //   item: { type: ItemTypes.SCALE },
-  //   end: (item, monitor) => {
-  //     if (monitor.didDrop()) {
-  //       onScale();
-  //     }
-  //   },
-  // });
+  const handleDragEnd = (e) => {
+    e.dataTransfer.clearData();
+  };
 
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
@@ -97,24 +31,30 @@ export default function Sidebar({
 
       <div className="font-bold">Motion</div>
       <div
-        // ref={dragMoveSteps}
         className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={() => moveSteps(10)}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "moveSteps")}
+        onDragEnd={handleDragEnd}
       >
         Move 10 steps
       </div>
       <div
-        // ref={dragRotate}
         className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={() => rotate(15)}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "rotate15")}
+        onDragEnd={handleDragEnd}
       >
         Turn 15 degrees
       </div>
 
       <div
-        // ref={dragRotate}
         className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={() => rotate(180)}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "rotate180")}
+        onDragEnd={handleDragEnd}
       >
         Invert the Image
       </div>
@@ -122,44 +62,57 @@ export default function Sidebar({
       <div
         className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={goToRandomPosition}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "changePosition")}
+        onDragEnd={handleDragEnd}
       >
         Go to random position
       </div>
 
       <div className="font-bold">Looks</div>
       <div
-        // ref={dragSayHello}
         className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={() => onSayHelloForSeconds(2)}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "sayHelloForSeconds")}
+        onDragEnd={handleDragEnd}
       >
         Say Hello for 2 seconds
       </div>
       <div
-        // ref={dragHide}
         className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={onHide}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "hide")}
+        onDragEnd={handleDragEnd}
       >
         Hide
       </div>
       <div
-        // ref={dragShow}
         className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={onShow}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "show")}
+        onDragEnd={handleDragEnd}
       >
         Show
       </div>
       <div
-        // ref={dragChangeBackground}
         className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={onChangeBackgroundColor}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "changeBackgroundColor")}
+        onDragEnd={handleDragEnd}
       >
         Change Background Color
       </div>
 
       <div
-        // ref={dragScale}
         className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
         onClick={onScale}
+        draggable
+        onDragStart={(e) => handleDragStart(e, "increaseSize")}
+        onDragEnd={handleDragEnd}
       >
         Increase Cat Size by 2x
       </div>

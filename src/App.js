@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import MidArea from "./components/MidArea";
 import PreviewArea from "./components/PreviewArea";
@@ -122,15 +122,17 @@ export default function App() {
   };
 
   const handleIncreaseSize = () => {
-    setScale((prevScale) => prevScale * 2);
+    setScale((prevScale) => prevScale * 1.05);
     setHistory((prevHistory) => [
       ...prevHistory,
-      { action: "increaseSize", value: 2 },
+      { action: "increaseSize", value: 1.05 },
     ]);
   };
 
   const handleReset = () => {
     const reverseActions = history.slice().reverse();
+
+    console.log("reverseActions", reverseActions);
 
     reverseActions.forEach((record, index) => {
       setTimeout(() => {
@@ -169,13 +171,16 @@ export default function App() {
         if (index === reverseActions.length - 1) {
           setHistory([]);
         }
-      }, index * 500);
+      }, index * 400);
     });
   };
 
-  setTimeout(() => {
-    setMessage("");
-  }, 10000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [message]);
 
   return (
     <div className="bg-blue-100 h-screen  font-sans">
@@ -192,7 +197,17 @@ export default function App() {
             onReset={handleReset}
             onScale={handleIncreaseSize}
           />
-          <MidArea />
+          <MidArea
+            moveSteps={moveSteps}
+            rotate={rotate}
+            goToRandomPosition={goToRandomPosition}
+            onSayHelloForSeconds={handleSayHelloForSeconds}
+            onHide={handleHide}
+            onShow={handleShow}
+            onChangeBackgroundColor={handleChangeBackgroundColor}
+            onScale={handleIncreaseSize}
+            onReset={handleReset}
+          />
         </div>
         <div
           className={`w-1/3 h-screen overflow-hidden flex flex-row  ${backgroundColor} border-t border-l border-gray-200 rounded-tl-xl ml-2`}
